@@ -6,6 +6,7 @@
       <input v-model="password" type="password" placeholder="Contraseña" required />
       <button type="submit">Entrar</button>
     </form>
+    <button @click="goToRegister">¿No tienes cuenta? Regístrate</button>
   </div>
 </template>
 
@@ -18,11 +19,21 @@ const username = ref('')
 const password = ref('')
 
 function login() {
-  if (username.value === 'admin' && password.value === '1234') {
+  // Verificamos si el usuario registrado está en sessionStorage
+  const regUser = JSON.parse(sessionStorage.getItem('registeredUser'))
+  if (
+    regUser &&
+    username.value === regUser.username &&
+    password.value === regUser.password
+  ) {
     sessionStorage.setItem('user', username.value)
     router.push('/')
   } else {
     alert('Usuario o contraseña incorrecta')
   }
+}
+
+function goToRegister() {
+  router.push('/register')
 }
 </script>

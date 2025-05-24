@@ -31,12 +31,6 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <div id="app">
-    <header v-if="showHeader">
-      <nav>
-        <router-link to="/">Inicio</router-link>
-        <router-link to="/login">Login</router-link>
-      </nav>
-    </header>
     <router-view />
   </div>
 </template>
