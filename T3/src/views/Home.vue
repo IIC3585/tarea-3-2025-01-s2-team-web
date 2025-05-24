@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Bienvenido {{ user }}</h1>
+    <h1>Bienvenid@ {{ user }}</h1>
     <button @click="logout">Cerrar sesión</button>
   </div>
 </template>
