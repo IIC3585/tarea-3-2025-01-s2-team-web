@@ -19,13 +19,11 @@ const username = ref('')
 const password = ref('')
 
 function login() {
-  // Verificamos si el usuario registrado está en sessionStorage
-  const regUser = JSON.parse(sessionStorage.getItem('registeredUser'))
-  if (
-    regUser &&
-    username.value === regUser.username &&
-    password.value === regUser.password
-  ) {
+  const users = JSON.parse(localStorage.getItem('registeredUsers')) || []
+  const user = users.find(
+    u => u.username === username.value && u.password === password.value
+  )
+  if (user) {
     sessionStorage.setItem('user', username.value)
     router.push('/')
   } else {

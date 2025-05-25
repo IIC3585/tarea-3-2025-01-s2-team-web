@@ -19,13 +19,18 @@ const username = ref('')
 const password = ref('')
 
 function register() {
-  // Guardamos usuario en sessionStorage
-  sessionStorage.setItem('registeredUser', JSON.stringify({
+  const users = JSON.parse(localStorage.getItem('registeredUsers')) || []
+  if (users.some(u => u.username === username.value)) {
+    alert('El usuario ya existe')
+    return
+  }
+  users.push({
     username: username.value,
     password: password.value
-  }))
+  })
+  localStorage.setItem('registeredUsers', JSON.stringify(users))
   alert('Usuario registrado correctamente')
-  router.push('/')
+  router.push('/login')
 }
 
 function goToLogin() {
