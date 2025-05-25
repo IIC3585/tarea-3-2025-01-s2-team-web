@@ -4,7 +4,9 @@
     <div v-else-if="weather">
       <p><strong>Ubicación:</strong> {{ weather.location.name }}, {{ weather.location.country }}</p>
       <p><strong>Temperatura:</strong> {{ weather.current.temperature }}°C</p>
+      <p><strong>Sensación térmica:</strong> {{ weather.current.feelslike }}°C</p>
       <p><strong>Condición:</strong> {{ weather.current.weather_descriptions[0] }}</p>
+      <p><strong>Índice UV:</strong> {{ weather.current.uv_index }}</p>
       <img :src="weather.current.weather_icons[0]" alt="Ícono del clima" />
     </div>
     <div v-else>

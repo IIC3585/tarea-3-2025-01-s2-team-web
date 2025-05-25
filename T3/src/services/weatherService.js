@@ -15,3 +15,10 @@ export async function getWeatherByCoords(lat, lon) {
 
   return data
 }
+
+export async function getWeatherByCity(city) {
+  const accessKey = import.meta.env.VITE_WEATHERSTACK_API_KEY
+  const url = `http://api.weatherstack.com/current?access_key=${accessKey}&query=${encodeURIComponent(city)}`
+  const res = await fetch(url, { method: 'GET' })
+  return await res.json()
+}
