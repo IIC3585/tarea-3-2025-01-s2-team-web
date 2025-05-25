@@ -45,7 +45,7 @@ const loadingBusqueda = ref(false)
 const errorBusqueda = ref('')
 const mensajeFavorito = ref('')
 
-const favoritosApi = ref(JSON.parse(sessionStorage.getItem('favoritosApi') || '[]'))
+const favoritosApi = ref([])
 
 onMounted(() => {
   const sessionUser = sessionStorage.getItem('user')
@@ -53,6 +53,7 @@ onMounted(() => {
     router.push('/login')
   } else {
     user.value = sessionUser
+    favoritosApi.value = JSON.parse(sessionStorage.getItem(`favoritosApi_${user.value}`) || '[]')
   }
 })
 
@@ -82,9 +83,13 @@ async function buscarClima() {
 async function agregarAFavoritos() {
   if (climaBusqueda.value) {
     try {
-      const res = await postFavorito(climaBusqueda.value.location.name)
-      favoritosApi.value.push({ id: res.id, ciudad: climaBusqueda.value.location.name })
-      sessionStorage.setItem('favoritosApi', JSON.stringify(favoritosApi.value)) // <-- Agrega esto
+      await postFavorito(climaBusqueda.value.location.name)
+      const nuevoFavorito = {
+        id: Date.now(),
+        ciudad: climaBusqueda.value.location.name
+      }
+      favoritosApi.value.push(nuevoFavorito)
+      sessionStorage.setItem(`favoritosApi_${user.value}`, JSON.stringify(favoritosApi.value))
       mensajeFavorito.value = '¡Ciudad agregada a favoritos (POST exitoso)!'
     } catch (e) {
       mensajeFavorito.value = 'Error al guardar favorito en el servidor.'
@@ -96,6 +101,7 @@ async function eliminarFavorito(id) {
   try {
     await deleteFavorito(id)
     favoritosApi.value = favoritosApi.value.filter(f => f.id !== id)
+    sessionStorage.setItem(`favoritosApi_${user.value}`, JSON.stringify(favoritosApi.value))
   } catch (e) {
     mensajeFavorito.value = 'Error al eliminar favorito en el servidor.'
   }
