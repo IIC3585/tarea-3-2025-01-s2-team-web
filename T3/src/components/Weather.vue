@@ -1,16 +1,18 @@
 <template>
-  <div class="weather">
-    <div v-if="loading">Cargando clima...</div>
+  <div class="weather mt-6 p-4 bg-gray-50 rounded-lg shadow">
+    <div v-if="loading" class="text-gray-700">Cargando clima...</div>
     <div v-else-if="weather">
-      <p><strong>Ubicación:</strong> {{ weather.location.name }}, {{ weather.location.country }}</p>
-      <p><strong>Temperatura:</strong> {{ weather.current.temperature }}°C</p>
-      <p><strong>Sensación térmica:</strong> {{ weather.current.feelslike }}°C</p>
-      <p><strong>Condición:</strong> {{ weather.current.weather_descriptions[0] }}</p>
-      <p><strong>Índice UV:</strong> {{ weather.current.uv_index }}</p>
-      <img :src="weather.current.weather_icons[0]" alt="Ícono del clima" />
+      <p class="text-gray-700 text-xl">{{ weather.location.name }}, {{ weather.location.country }}</p>
+      <div class="flex justify-center">
+        <img :src="weather.current.weather_icons[0]" alt="Ícono del clima" class="mt-4" />
+      </div>
+      <p class="text-gray-700"><strong>Temperatura:</strong> {{ weather.current.temperature }}°C</p>
+      <p class="text-gray-700"><strong>Sensación térmica:</strong> {{ weather.current.feelslike }}°C</p>
+      <p class="text-gray-700"><strong>Condición:</strong> {{ weather.current.weather_descriptions[0] }}</p>
+      <p class="text-gray-700"><strong>Índice UV:</strong> {{ weather.current.uv_index }}</p>
     </div>
     <div v-else>
-      <p>No se pudo obtener el clima. ¿Tienes permisos de geolocalización activados?</p>
+      <p class="text-gray-700">No se pudo obtener el clima. ¿Tienes permisos de geolocalización activados?</p>
     </div>
   </div>
 </template>
