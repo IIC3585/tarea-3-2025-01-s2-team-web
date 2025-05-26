@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1 class="text-4xl font-bold text-center text-blue-500 py-4">☁️ Cloud.ly ☁️</h1>
     <router-view />
   </div>
 </template>
