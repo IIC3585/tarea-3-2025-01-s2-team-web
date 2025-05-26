@@ -3,7 +3,7 @@ export async function getWeatherByCoords(lat, lon) {
 
   const accessKey = import.meta.env.VITE_WEATHERSTACK_API_KEY
 
-  const url = `http://api.weatherstack.com/current?access_key=${accessKey}&query=${lat},${lon}`
+  const url = `https://api.weatherstack.com/current?access_key=${accessKey}&query=${lat},${lon}`
   
   console.log(url)
   const res = await fetch(url, { method: 'GET' })
@@ -18,7 +18,7 @@ export async function getWeatherByCoords(lat, lon) {
 
 export async function getWeatherByCity(city) {
   const accessKey = import.meta.env.VITE_WEATHERSTACK_API_KEY
-  const url = `http://api.weatherstack.com/current?access_key=${accessKey}&query=${encodeURIComponent(city)}`
+  const url = `https://api.weatherstack.com/current?access_key=${accessKey}&query=${encodeURIComponent(city)}`
   const res = await fetch(url, { method: 'GET' })
   return await res.json()
 }
