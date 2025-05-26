@@ -69,7 +69,7 @@ const password = ref('');
 const isOpen = ref(false);
 
 function login() {
-  const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+  const users = JSON.parse(sessionStorage.getItem('registeredUsers')) || []
   const user = users.find(
     u => u.username === username.value && u.password === password.value
   );
@@ -91,5 +91,4 @@ function setIsOpen(value) {
 </script>
 
 <style>
-/* Removed redundant styles and replaced with reusable classes */
 </style>

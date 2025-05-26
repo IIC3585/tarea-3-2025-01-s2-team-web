@@ -42,7 +42,7 @@ const username = ref('')
 const password = ref('')
 
 function register() {
-  const users = JSON.parse(localStorage.getItem('registeredUsers')) || []
+  const users = JSON.parse(sessionStorage.getItem('registeredUsers')) || []
   if (users.some(u => u.username === username.value)) {
     alert('El usuario ya existe')
     return
@@ -51,7 +51,7 @@ function register() {
     username: username.value,
     password: password.value
   })
-  localStorage.setItem('registeredUsers', JSON.stringify(users))
+  sessionStorage.setItem('registeredUsers', JSON.stringify(users))
   alert('Usuario registrado correctamente')
   router.push('/login')
 }
